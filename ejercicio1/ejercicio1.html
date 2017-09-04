@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <center><h1><i> Music/sounds</i></h1></center>
+    <div class="keys">
+        <div data-key="65" class="keys">
+            <kbd>A</kbd>
+            <span class="sounds">La Garfield - Make It Real</span>
+          </div>
+          <div data-key="83" class="keys">
+            <kbd>S</kbd>
+            <span class="sounds">aplausos</span>
+          </div>
+          <div data-key="68" class="keys">
+            <kbd>D</kbd>
+            <span class="sounds">pajaros</span>
+          </div>
+          <div data-key="70" class="keys">
+            <kbd>F</kbd>
+            <span class="sounds">Violent Pornography</span>
+          </div>
+          <div data-key="71" class="keys">
+            <kbd>G</kbd>
+            <span class="sounds">Es por ti</span>
+        </div>
+            <div data-key="72" class="key">
+                <kbd>H</kbd>
+                <span class="sound">lluvia</span>
+        </div>
+    </div>
+
+    <audio data-key="65" src= " sounds/La Garfield - Make It Real.mp3"> </audio>
+    <audio data-key ="83" src = " sounds/aplausos_5.mp3"> </audio>
+    <audio data-key ="68" src = " sounds/010702474_prev.mp3"> </audio>
+    <audio data-key ="70" src = " sounds/Violent Pornography.mp3"> </audio>
+    <audio data-key ="71" src = " sounds/Es Por Ti.mp3"> </audio>
+    <audio data-key ="72" src = " sounds/ambiente-_3.mp3"> </audio>
+   
+        <script>
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+
+</body>
+</html>
+
